@@ -1,4 +1,4 @@
-html, body, #wrapper
+html, body, #wrapper_index, #wrapper_ciphers
 {
 	font-family: Constantia, Lucida Bright, DejaVu Serif, Georgia, serif;	
 	width: 100%;
@@ -9,7 +9,7 @@ p
 {
 	color:white
 }
-#container
+#container_index, #container_ciphers
 {
 	width: 960px;
 	margin: 0 auto;
@@ -67,5 +67,22 @@ p
 {
 	text-align: justify
 }
-
+#cipher1
+{
+	float: left; 
+	width: 31%; 
+	margin-right: 2%	
+}
+#cipher2
+{
+	float: left; 
+	width: 31%; 
+	margin-right: 2%
+}
+#cipher3
+{
+	float: left; 
+	width: 31%; 
+	margin-right: 2%
+}
 
