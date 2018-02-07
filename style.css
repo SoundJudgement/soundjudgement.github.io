@@ -67,19 +67,20 @@ p
 {
 	text-align: justify
 }
-#cipher1
+#caesar_cipher
 {
 	float: left; 
 	width: 31%; 
 	margin-right: 2%	
 }
-#cipher2
+
+#hill_cipher
 {
 	float: left; 
 	width: 31%; 
 	margin-right: 2%
 }
-#cipher3
+#Vigenere_cipher
 {
 	float: left; 
 	width: 31%; 
