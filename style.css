@@ -1,3 +1,71 @@
-body {background-color:black}
-h1 {color:white}
-p {color:white}
+html, body, #wrapper
+{
+	font-family: Constantia, Lucida Bright, DejaVu Serif, Georgia, serif;	
+	width: 100%;
+	height: 100%;
+	background-color:black
+}
+p 
+{
+	color:white
+}
+#container
+{
+	width: 960px;
+	margin: 0 auto;
+	padding: 6px 12px
+   
+}
+
+#heading 
+{
+	background-image: url("images/header.jpg");
+	background-color:black;
+	border-style: solid;
+	border-color: white;
+	color:white;
+	text-align:center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	height: 35vh;
+	background-position: center center;
+	position: relative
+	
+}
+
+#jefferson
+{
+	float: left; 
+	width: 31%; 
+	margin-right: 2%
+}
+#line1
+{
+	
+}
+#line2
+{
+	
+}
+#wheatstone
+{
+	float: left; 
+	width: 31%; 
+	margin-right: 2%
+}
+#enigma
+{
+	float: left; 
+	width: 31%; 
+	margin-right: 2%
+}
+#main_intro{
+	text-align: justify
+}
+#classical_ciphers
+{
+	text-align: justify
+}
+
+
