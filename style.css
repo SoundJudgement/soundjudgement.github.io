@@ -3,7 +3,9 @@ html, body, #wrapper_index, #wrapper_ciphers
 	font-family: Constantia, Lucida Bright, DejaVu Serif, Georgia, serif;	
 	width: 100%;
 	height: 100%;
-	background-color:black
+	background-color:black;
+	color: white
+	
 }
 p 
 {
@@ -14,6 +16,7 @@ p
 {
 	width: 960px;
 	margin: 0 auto;
+	
 	padding: 6px 12px
    
 }
@@ -68,23 +71,94 @@ p
 {
 	text-align: justify
 }
-#caesar_cipher
+#caesar_cipherbtn
 {
 	float: left; 
 	width: 31%; 
 	margin-right: 2%	
 }
 
+#hill_cipherbtn
+{
+	float: left; 
+	width: 31%; 
+	margin-right: 2%
+}
+#vigenere_cipherbtn
+{
+	float: left; 
+	width: 31%; 
+	margin-right: 2%
+}
+#caesar_cipher
+{
+	background-image: url("images/nkg1.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-style: solid;
+	border-color: white;
+	width: 100%;
+	height: 100vh	
+}
 #hill_cipher
 {
-	float: left; 
-	width: 31%; 
-	margin-right: 2%
+	background-image: url("images/nkg2.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-style: solid;
+	border-color: white;
+	width: 100%;
+	height: 100vh	
 }
-#Vigenere_cipher
+#vigenere_cipher
 {
-	float: left; 
-	width: 31%; 
-	margin-right: 2%
+	background-image: url("images/nkg3.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-style: solid;
+	border-color: white;
+	width: 100%;
+	height: 100vh	
 }
-
+#inner_caesar
+{
+	background-image: url("images/innercipherbkg1.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-style: solid;
+	border-color: white;
+	width: 80%;
+	margin: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height: 80vh;
+	text-align: center
+}
+#inner_hill
+{
+	background-image: url("images/innercipherbkg1.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-style: solid;
+	border-color: white;
+	width: 80%;
+	margin: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height: 80vh;
+	text-align: center
+}
+#inner_vigenere
+{
+	background-image: url("images/innercipherbkg1.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-style: solid;
+	border-color: white;
+	width: 80%;
+	margin: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height: 80vh;
+	text-align: center
+}

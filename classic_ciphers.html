@@ -2,12 +2,27 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" media="screen" href="style.css">
+	<script src="scripts.js"></script>
 	<title>Classical Ciphers Test</title>
 </head>
 <body>
 	<div id="wrapper_ciphers">
 	<div id="container_ciphers">
-	<p>You're not the boss of me.</p>
+	<div id="heading"><h1><br>Classical <br>Ciphers</h1></div>
+		<div id="caesar_cipher">
+			<div id="inner_caesar"><h1>Caesar Cipher</h1>
+				<input type="text" id="caesar_text" >
+				<input type="text" id="caesar_key" >
+				<input type="submit" value="Submit" onClick="caesarEncipher()" >
+			
+			
+		</div>
+		<div id="hill_cipher">
+			<div id="inner_hill"><h1>Hill Cipher</h1></div>
+		</div>
+		<div id="vigenere_cipher">
+			<div id="inner_vigenere"><h1>Vigenere Cipher</h1></div>
+		</div>
 	</div></div>
 </body>
 </html>
