@@ -13,6 +13,7 @@ function caesarEncipher(){
 		return false;
 	}
 	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+	var alength = alph.length;
 	var text = document.getElementById("caesar_text").value.toUpperCase();  // send to uppse case so we can compare with our alphabet
 	var key = parseInt(document.getElementById("caesar_key").value);
 	var encipheredText = "";
@@ -20,9 +21,9 @@ function caesarEncipher(){
 	var newIndex;
 	for (var c=0; c<text.length; c++){    // iterate through characters of input text
 		
-		for (var l = 0; l<alph.length; l++ in alph){   // for each character search for corresponding alph entry then shift the index by the input key for the new index and thus the encipherment
+		for (var l = 0; l<alph.length; l++){   // for each character search for corresponding alph entry then shift the index by the input key for the new index and thus the encipherment
 			if (text[c] === alph[l]){
-				newIndex = (((l+key)%26)+26)%26; // had to add additional steps '+26)%26' to deal with negative and (pointlessly) large numbers
+				newIndex = (((l+key)%alength)+alength)%alength; // had to add additional steps '+26)%26' to deal with negative 													and (pointlessly) large numbers
 				//alert(newIndex);
 				encipheredText += alph[newIndex];
 				i++;
@@ -49,6 +50,7 @@ function caesarDecipher(){  // exactly the same as encipher but we subtract the 
 		return false;
 	}
 	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+	var alength = alph.length;
 	var text = document.getElementById("caesar_text").value.toUpperCase();
 	var key = parseInt(document.getElementById("caesar_key").value);
 	var decipheredText = "";
@@ -58,7 +60,7 @@ function caesarDecipher(){  // exactly the same as encipher but we subtract the 
 		
 		for (var l = 0; l<alph.length; l++ in alph){
 			if (text[c] === alph[l]){
-				newIndex = (((l-key)%26)+26)%26; // had to add additional steps '+26)%26' to deal with negative numbers
+				newIndex = (((l-key)%alength)+alength)%alength; // had to add additional steps '+26)%26' to deal with negative numbers
 				//alert(newIndex);
 				decipheredText += alph[newIndex];
 				i++;
@@ -82,15 +84,18 @@ function hillEncipher(){				// check for empty boxes
                 alert("Please enter some text to encipher.");
 				return false;
 	}
-	else if (document.getElementById("m1").value === "" || document.getElementById("m8").value === "" || document.getElementById("m9").value === "" || document.getElementById("m2").value === "" || document.getElementById("m3").value === "" || document.getElementById("m4").value === "" || document.getElementById("m5").value === "" || document.getElementById("m6").value === "" || document.getElementById("m7").value === "" ) {
+	else if (document.getElementById("m1").value === "" || document.getElementById("m8").value === "" || 			document.getElementById("m9").value === "" || document.getElementById("m2").value === "" || 	 document.getElementById("m3").value === "" || document.getElementById("m4").value === "" || document.getElementById("m5").value === "" || document.getElementById("m6").value === "" || document.getElementById("m7").value === "" ) {
                 alert("Please enter a valid key - all boxes must contain an integer corresponding to a letter of the alphabet (A=0, B=1, C=2 ... Z=25)");
 				return false;
             }
 	
 	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+	var alength = alph.length;
 	var text = document.getElementById("hill_text").value.toUpperCase();
 	//var keyText = document.getElementById("hill_key").value.toUpperCase();
 	var decipheredText = "";
+	var encipheredText = "";
+	var encipheredMatrix = [];
 	var key = [];
 	var textVector = [];
 	var textMatrix = [];
@@ -122,7 +127,7 @@ function hillEncipher(){				// check for empty boxes
 		alert("Matrix is not invertible. Use the example given or search for an invertible matrix. Or try another random key!");
 		
 	}else{
-		// find inverse of key matrix - i did it using determinants. 
+	// find inverse of key matrix - i did it using determinants. 
 	// so find the matrix of minors
 	matrixOfMinors[0][0] = (key[1][1]*key[2][2]) - (key[1][2]*key[2][1]);
 	matrixOfMinors[0][1] = (key[1][0]*key[2][2]) - (key[1][2]*key[2][0]);
@@ -160,62 +165,80 @@ function hillEncipher(){				// check for empty boxes
 		}
 	}	
 	// Now to turn the input text into a vector
-	i = 0;
+	var i = 0;
 	for (var c=0; c<text.length; c++){
 		for (var l = 0; l<alph.length; l++ in alph){
 			if (text[c] === alph[l]){
-				
-				//alert(newIndex);
-				textVector[i] = l;
+				textVector[i] = l;  
 				i++;
 			}
 		}	
-	}
+	}								// CORRECT UP TO HERE!!!!
 	if(textVector.length%3 === 1){
-		textVector[i] = "null";
+		textVector[i] = 0;
 		i++;
-		textVector[i] = "null";
-	}else if(textVector.length%3 === 2){
-		textVector[i] = "null";
+		textVector[i] = 0;
 	}
-	alert(textVector.length);
+	if(textVector.length%3 === 2){
+		textVector[i] = 0;
+	}
 	//  create the matrix from the input text with 3 rows as the key is always 3x3.
 	var matrixDepth;
-	if(textVector.length <= 3){
-	   	matrixDepth = 1;
+	if(textVector.length > 3){
+	   	matrixDepth = textVector.length/3;
 	}else {
-		matrixDepth = textVector.length/3;
+		matrixDepth = 1;
 	}
-	
-	for(var i = 0; i<3; i++){
-		textMatrix[i] = new Array(matrixDepth); 
+	// Check matrix depth is 1 or above, if above one we need to turn from vector to actual matrix, if not above 1, leave as is.
+	if(matrixDepth>1){
+		for(var i = 0; i<3; i++){
+			textMatrix[i] = new Array(matrixDepth); 
+			encipheredMatrix[i] = new Array(matrixDepth);
+		}
 	}
 	// need to populate the text matrix
-	var k = 0;
-	for(var j=0; j<matrixDepth; j++){
-		for(var i=0; i<3; i++){
-			if(textVector[k] === "null"){
-				textMatrix[i][j] = 0;
-				k++;
-			}else{
-				textMatrix[i][j] = textVector[k];
-				k++;
-			}
-		}
-	}
-	var teststring = "";
-	alert("Determinant is: " + key_determinant + "(just to makesure maths good to this point)");
-	alert("Matrix Depth recorded: " + matrixDepth);
-	for(var j = 0; j<matrixDepth; j++){
-		for(var i = 0; i<3;i++){
-			//teststring += textMatrix[i][j];
-			alert(textMatrix[i][j]);
-		}
-		
-	}
-	// then iterate through one row at a time multiplying my correponding column value ie i2*j2
-	// then to next column 	
 	
-	var keyTimesVector = [];	
+	var numberCheck;
+	// two methods depending on whether 1 or more depth.
+	if(matrixDepth === 1){	
+		var k = 0;
+		for(var i=0; i<3; i++){
+			textMatrix[i] = textVector[k];
+			k++;
+		}				// textMatrix FINE UP TO HERE.
+			
+		// now to multiply the text matrix with the key matrix, we do it 1 vector of 3 at a time, and then the modulo of each element
+		
+		for(var j = 0; j<3; j++){
+			numberCheck = 0;
+			for(var i = 0; i<3;i++){
+				numberCheck += (key[j][i] * textMatrix[i]);
+			}
+			encipheredMatrix[j] = numberCheck%alength;
+		}
+		alert(encipheredMatrix);
+		
+	}else{
+		// and here for matrices above 1 depth.
+		var k = 0;
+		for(var j = 0; j < matrixDepth; j++){
+			for(var i=0; i<3; i++){
+				textMatrix[j][i] = textVector[k];
+				k++;
+			}	
+		}				
+		// now to multiply the text matrix with the key matrix, we do it 1 vector of 3 at a time, and then the modulo of each element
+		for(var k = 0; k < matrixDepth; k++){
+			for(var j = 0; j<3; j++){
+				numberCheck = 0;
+				for(var i = 0; i<3;i++){
+					numberCheck += (key[j][i] * textMatrix[k][i]);
+				}
+				encipheredMatrix[k][j] = numberCheck%alength;
+			}	
+		}
+		alert(encipheredMatrix);
+	}
+	
 }
 }
