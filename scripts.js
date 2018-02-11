@@ -76,20 +76,17 @@ function caesarDecipher(){  // exactly the same as encipher but we subtract the 
 
 // function to encipher using hills cipher. 
 function hillEncipher(){				// check for empty boxes
-	//if(document.getElementById("hill_text").value.length !== 3){
-	//	alert("Due to limitations within this code, the Hill Cipher can only encrypt a message of exactly 3 letters.");
-	//	return false;
-	//}
+	
 	if (document.getElementById("hill_text").value === "") {
                 alert("Please enter some text to encipher.");
 				return false;
 	}
 	else if (document.getElementById("m1").value === "" || document.getElementById("m8").value === "" || 			document.getElementById("m9").value === "" || document.getElementById("m2").value === "" || 	 document.getElementById("m3").value === "" || document.getElementById("m4").value === "" || document.getElementById("m5").value === "" || document.getElementById("m6").value === "" || document.getElementById("m7").value === "" ) {
-                alert("Please enter a valid key - all boxes must contain an integer corresponding to a letter of the alphabet (A=0, B=1, C=2 ... Z=25)");
+                alert("Please enter a valid key - all boxes must contain an integer corresponding to a letter of the alphabet (A=0, B=1, C=2 ... Z=25, space=26, .=27, !=28)");
 				return false;
             }
 	
-	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", " ", ".", "!"];
 	var alength = alph.length;
 	var text = document.getElementById("hill_text").value.toUpperCase();
 	//var keyText = document.getElementById("hill_key").value.toUpperCase();
@@ -101,12 +98,15 @@ function hillEncipher(){				// check for empty boxes
 	var textMatrix = [];
 	var coFactor = [];
 	var inverseKey = [];
+	var realInverseKey = [];
 	var matrixOfMinors = [];
 	var adjugate = [];
+	var inverseDeterminant
 	for(var i=0; i<3; i++) {
     	key[i] = new Array(3);
 		coFactor[i] = new Array(3);
 		inverseKey[i] = new Array(3);
+		realInverseKey[i] = new Array(3);
 		matrixOfMinors[i] = new Array(3);
 		adjugate[i] = new Array(3);
 	}		// assign values to key matrix
@@ -127,6 +127,13 @@ function hillEncipher(){				// check for empty boxes
 		alert("Matrix is not invertible. Use the example given or search for an invertible matrix. Or try another random key!");
 		
 	}else{
+	// find inverse determinant
+	for(var i = 2; i<alength; i++){
+		if((key_determinant * i) % alength === 1){
+			inverseDeterminant = i;
+		}
+	}	
+	
 	// find inverse of key matrix - i did it using determinants. 
 	// so find the matrix of minors
 	matrixOfMinors[0][0] = (key[1][1]*key[2][2]) - (key[1][2]*key[2][1]);
@@ -147,7 +154,7 @@ function hillEncipher(){				// check for empty boxes
 			signflipper *= -1;
 		}
 	}
-	// from this we can find the adjugate
+	// from this we can find the adjugate and the values for the inversekey - not actual inverse matrix - which seem to be different things...
 	adjugate[0][0] = coFactor[0][0];
 	adjugate[0][1] = coFactor[1][0];
 	adjugate[0][2] = coFactor[2][0];
@@ -157,11 +164,19 @@ function hillEncipher(){				// check for empty boxes
 	adjugate[2][0] = coFactor[0][2];
 	adjugate[2][1] = coFactor[1][2];
 	adjugate[2][2] = coFactor[2][2];
-	// and from this the inverse matrix
-	var z = 1/key_determinant;
+	for(var i = 0; i<3; i++){
+		for(var j = 0; j <3; j++){
+			while(adjugate[i][j] < 0){
+				adjugate[i][j] += alength;
+			}
+			realInverseKey[i][j] =((adjugate[i][j]%alength) * inverseDeterminant)%alength;		
+		}
+	}
+	// and from this the inverse matrix - which seemingly we dont need.
+	var z = 1/key_determinant; 		 
 	for(i = 0; i<3; i++){
 		for(var j = 0; j<3; j++){
-			inverseKey[i][j] = adjugate[i][j] * z;			
+			inverseKey[i][j] = adjugate[i][j] + "/" + key_determinant;			
 		}
 	}	
 	// Now to turn the input text into a vector
@@ -173,7 +188,7 @@ function hillEncipher(){				// check for empty boxes
 				i++;
 			}
 		}	
-	}								// CORRECT UP TO HERE!!!!
+	}								
 	if(textVector.length%3 === 1){
 		textVector[i] = 0;
 		i++;
@@ -205,7 +220,7 @@ function hillEncipher(){				// check for empty boxes
 		for(var i=0; i<3; i++){
 			textMatrix[i] = textVector[k];
 			k++;
-		}				// textMatrix FINE UP TO HERE.
+		}				
 			
 		// now to multiply the text matrix with the key matrix, we do it 1 vector of 3 at a time, and then the modulo of each element
 		
@@ -215,14 +230,13 @@ function hillEncipher(){				// check for empty boxes
 				numberCheck += (key[j][i] * textMatrix[i]);
 			}
 			encipheredMatrix[j] = numberCheck%alength;
-		}
-		alert(encipheredMatrix);
-		
+			encipheredText += alph[encipheredMatrix[j]];
+		}	
 	}else{
 		// and here for matrices above 1 depth.
 		var k = 0;
-		for(var j = 0; j < matrixDepth; j++){
-			for(var i=0; i<3; i++){
+		for(var j = 0; j < 3; j++){
+			for(var i=0; i<matrixDepth; i++){
 				textMatrix[j][i] = textVector[k];
 				k++;
 			}	
@@ -232,13 +246,22 @@ function hillEncipher(){				// check for empty boxes
 			for(var j = 0; j<3; j++){
 				numberCheck = 0;
 				for(var i = 0; i<3;i++){
-					numberCheck += (key[j][i] * textMatrix[k][i]);
+					numberCheck += (key[j][i] * textMatrix[i][k]);
 				}
-				encipheredMatrix[k][j] = numberCheck%alength;
+				encipheredMatrix[j][k] = numberCheck%alength;
+				encipheredText += alph[encipheredMatrix[j][k]];
 			}	
 		}
-		alert(encipheredMatrix);
 	}
-	
-}
+	document.getElementById("hill_ciphertext").style.color = "white";
+	document.getElementById("hill_ciphertext").innerHTML = "Enciphered Text: " + encipheredText;
+	document.getElementById("invMat_text").style.color = "white";
+	document.getElementById("matrix_inverse1").style.color = "white";
+	document.getElementById("matrix_inverse2").style.color = "white";
+	document.getElementById("matrix_inverse3").style.color = "white";
+	document.getElementById("matrix_inverse1").innerHTML = realInverseKey[0][0] + "&emsp;" + realInverseKey[0][1] + "&emsp;" + realInverseKey[0][2];
+	document.getElementById("matrix_inverse2").innerHTML = realInverseKey[1][0] + "&emsp;" + realInverseKey[1][1] + "&emsp;" + realInverseKey[1][2];
+	document.getElementById("matrix_inverse3").innerHTML = realInverseKey[2][0] + "&emsp;" + realInverseKey[2][1] + "&emsp;" + realInverseKey[2][2];
+		
+	}
 }

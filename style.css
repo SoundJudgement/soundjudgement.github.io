@@ -143,9 +143,9 @@ p
 	border-color: white;
 	width: 80%;
 	margin: auto;
-	margin-top: 50px;
-	margin-bottom: 50px;
-	height: 80vh;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	height: 90vh;
 	text-align: center
 }
 #inner_vigenere
@@ -168,7 +168,21 @@ p
 #hill_text{
 	width:80%;
 }
-
+#matrix_inverse1{
+	 color: black;
+}
+#matrix_inverse2{
+	color: black;
+}
+#matrix_inverse3{
+	color: black;
+}
+#invMat_text{
+	color: black;
+}
+#hill_ciphertext{
+	color: black;
+}
 #m1, #m2, #m3, #m4, #m5, #m6, #m7, #m8, #m9{
 	width: 20px;
 }

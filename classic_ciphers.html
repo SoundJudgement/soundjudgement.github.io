@@ -26,12 +26,10 @@
 			<p>Text to encipher/decipher.</p>
 			<input type="text" id="hill_text" >
 			<br>
-			
-			<p>Please enter 3 x 3 matrix from letters 0-25 (representing A-Z).</p>
-			<br>		
+			<p>Please enter 3 x 3 matrix from letters 0-25 (representing A-Z).</p>	
 			<input type="text" id="m1" >
 			<input type="text" id="m2" >
-			<input type="text" id="m3" >
+			<input type="text" id="m3" >	
 			<br>
 			<br>
 			<input type="text" id="m4" >
@@ -43,9 +41,11 @@
 			<input type="text" id="m8" >
 			<input type="text" id="m9" >
 			<br>
-			<br> 
-	
-			<br><br>
+			<p id="hill_ciphertext">Ciphertext: </p>
+			<p id="invMat_text">Decipher Key:</p>
+			<p id="matrix_inverse1">1 &emsp; 2 &emsp; 3</p>
+			<p id="matrix_inverse2">4 &emsp; 5 &emsp; 6</p>
+			<p id="matrix_inverse3">7 &emsp; 8 &emsp; 9</p>
 			<input type="submit" value="Encipher" onClick="hillEncipher()" >
 			<input type="submit" value="Decipher" onClick="caesarDecipher()" >
 			</div>
