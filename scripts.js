@@ -74,10 +74,10 @@ function caesarDecipher(){  // exactly the same as encipher but we subtract the 
 
 // function to encipher using hills cipher. 
 function hillEncipher(){				// check for empty boxes
-	if(document.getElementById("hill_text").value.length !== 3){
-		alert("Due to limitations within this code, the Hill Cipher can only encrypt a message of exactly 3 letters.");
-		return false;
-	}
+	//if(document.getElementById("hill_text").value.length !== 3){
+	//	alert("Due to limitations within this code, the Hill Cipher can only encrypt a message of exactly 3 letters.");
+	//	return false;
+	//}
 	if (document.getElementById("hill_text").value === "") {
                 alert("Please enter some text to encipher.");
 				return false;
@@ -89,9 +89,11 @@ function hillEncipher(){				// check for empty boxes
 	
 	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 	var text = document.getElementById("hill_text").value.toUpperCase();
+	//var keyText = document.getElementById("hill_key").value.toUpperCase();
 	var decipheredText = "";
 	var key = [];
 	var textVector = [];
+	var textMatrix = [];
 	var coFactor = [];
 	var inverseKey = [];
 	var matrixOfMinors = [];
@@ -150,15 +152,13 @@ function hillEncipher(){				// check for empty boxes
 	adjugate[2][0] = coFactor[0][2];
 	adjugate[2][1] = coFactor[1][2];
 	adjugate[2][2] = coFactor[2][2];
-	// and fropm this the inverse matrix
+	// and from this the inverse matrix
 	var z = 1/key_determinant;
 	for(i = 0; i<3; i++){
 		for(var j = 0; j<3; j++){
 			inverseKey[i][j] = adjugate[i][j] * z;			
 		}
 	}	
-	alert(key_determinant);
-	
 	// Now to turn the input text into a vector
 	i = 0;
 	for (var c=0; c<text.length; c++){
@@ -171,8 +171,51 @@ function hillEncipher(){				// check for empty boxes
 			}
 		}	
 	}
-	alert(textVector[2]);
-	var keyTimesVector = [];
+	if(textVector.length%3 === 1){
+		textVector[i] = "null";
+		i++;
+		textVector[i] = "null";
+	}else if(textVector.length%3 === 2){
+		textVector[i] = "null";
+	}
+	alert(textVector.length);
+	//  create the matrix from the input text with 3 rows as the key is always 3x3.
+	var matrixDepth;
+	if(textVector.length <= 3){
+	   	matrixDepth = 1;
+	}else {
+		matrixDepth = textVector.length/3;
+	}
 	
+	for(var i = 0; i<3; i++){
+		textMatrix[i] = new Array(matrixDepth); 
+	}
+	// need to populate the text matrix
+	var k = 0;
+	for(var j=0; j<matrixDepth; j++){
+		for(var i=0; i<3; i++){
+			if(textVector[k] === "null"){
+				textMatrix[i][j] = 0;
+				k++;
+			}else{
+				textMatrix[i][j] = textVector[k];
+				k++;
+			}
+		}
+	}
+	var teststring = "";
+	alert("Determinant is: " + key_determinant + "(just to makesure maths good to this point)");
+	alert("Matrix Depth recorded: " + matrixDepth);
+	for(var j = 0; j<matrixDepth; j++){
+		for(var i = 0; i<3;i++){
+			//teststring += textMatrix[i][j];
+			alert(textMatrix[i][j]);
+		}
+		
+	}
+	// then iterate through one row at a time multiplying my correponding column value ie i2*j2
+	// then to next column 	
+	
+	var keyTimesVector = [];	
 }
 }
