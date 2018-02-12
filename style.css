@@ -183,6 +183,10 @@ p
 #hill_ciphertext{
 	color: black;
 }
+#hill_enterkeytext{
+	margin-left: 70px;
+	margin-right: 70px;
+}
 #m1, #m2, #m3, #m4, #m5, #m6, #m7, #m8, #m9{
 	width: 20px;
 }

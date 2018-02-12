@@ -1,5 +1,5 @@
 
-//function to encipher using caesars cipher
+//function to encipher using caesars pathetic cipher
 function caesarEncipher(){
 	if (document.getElementById("caesar_text").value === "") {	// check for empty boxes
                 alert("Please enter some text to encipher.");
@@ -86,10 +86,9 @@ function hillEncipher(){				// check for empty boxes
 				return false;
             }
 	
-	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", " ", ".", "!"];
+	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", " ", ".", "?"];
 	var alength = alph.length;
 	var text = document.getElementById("hill_text").value.toUpperCase();
-	//var keyText = document.getElementById("hill_key").value.toUpperCase();
 	var decipheredText = "";
 	var encipheredText = "";
 	var encipheredMatrix = [];
@@ -188,7 +187,8 @@ function hillEncipher(){				// check for empty boxes
 				i++;
 			}
 		}	
-	}								
+	}		
+	// need to add padding in form of extra 0's
 	if(textVector.length%3 === 1){
 		textVector[i] = 0;
 		i++;
@@ -235,18 +235,19 @@ function hillEncipher(){				// check for empty boxes
 	}else{
 		// and here for matrices above 1 depth.
 		var k = 0;
-		for(var j = 0; j < 3; j++){
-			for(var i=0; i<matrixDepth; i++){
-				textMatrix[j][i] = textVector[k];
+		for(var j = 0; j < matrixDepth; j++){
+			for(var i=0; i<3; i++){
+				textMatrix[i][j] = textVector[k];
 				k++;
 			}	
-		}				
-		// now to multiply the text matrix with the key matrix, we do it 1 vector of 3 at a time, and then the modulo of each element
+		}
 		for(var k = 0; k < matrixDepth; k++){
 			for(var j = 0; j<3; j++){
 				numberCheck = 0;
 				for(var i = 0; i<3;i++){
+					//alert(key[j][i] + " * " + textMatrix[i][k]);
 					numberCheck += (key[j][i] * textMatrix[i][k]);
+					//alert(key[j][i] + " multiplied by " + textMatrix[i][k]);
 				}
 				encipheredMatrix[j][k] = numberCheck%alength;
 				encipheredText += alph[encipheredMatrix[j][k]];
@@ -262,6 +263,110 @@ function hillEncipher(){				// check for empty boxes
 	document.getElementById("matrix_inverse1").innerHTML = realInverseKey[0][0] + "&emsp;" + realInverseKey[0][1] + "&emsp;" + realInverseKey[0][2];
 	document.getElementById("matrix_inverse2").innerHTML = realInverseKey[1][0] + "&emsp;" + realInverseKey[1][1] + "&emsp;" + realInverseKey[1][2];
 	document.getElementById("matrix_inverse3").innerHTML = realInverseKey[2][0] + "&emsp;" + realInverseKey[2][1] + "&emsp;" + realInverseKey[2][2];
+	}
+}
+
+function hillDecipher(){				// check for empty boxes
+	
+	if (document.getElementById("hill_text").value === "") {
+                alert("Please enter some enciphered text to decipher.");
+				return false;
+	}
+	else if (document.getElementById("m1").value === "" || document.getElementById("m8").value === "" || 			document.getElementById("m9").value === "" || document.getElementById("m2").value === "" || 	 document.getElementById("m3").value === "" || document.getElementById("m4").value === "" || document.getElementById("m5").value === "" || document.getElementById("m6").value === "" || document.getElementById("m7").value === "" ) {
+                alert("Please enter a valid key - it was provided when the text was enciphered. ");
+				return false;
+            }
+	
+	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", " ", ".", "?"];
+	var alength = alph.length;
+	var text = document.getElementById("hill_text").value.toUpperCase();
+	var textVector = [];
+	var i = 0;
+	for (var c=0; c<text.length; c++){
+		for (var l = 0; l<alph.length; l++ in alph){
+			if (text[c] === alph[l]){
+				textVector[i] = l;  
+				i++;
+			}else{
+				textVector[i] = 26;
+			}
+		}	
+	}	
+	var decipheredText = "";
+	var decipheredVector= [];
+	var decipheredMatrix = [];
+	var encipheredMatrix = [];
+	var matrixDepth;
+	if(text.length > 3){
+	   	matrixDepth = text.length/3;
+	}else {
+		matrixDepth = 1;
+	}
+	var realInversekey =[];
+	for (var i = 0; i<3; i++){
+		 realInversekey[i] = new Array(3);
+		 }
+	// assign values to realinversekey matrix
+	realInversekey[0][0] = parseInt(document.getElementById("m1").value);
+	realInversekey[0][1] = parseInt(document.getElementById("m2").value);
+	realInversekey[0][2] = parseInt(document.getElementById("m3").value);
+	realInversekey[1][0] = parseInt(document.getElementById("m4").value);
+	realInversekey[1][1] = parseInt(document.getElementById("m5").value);
+	realInversekey[1][2] = parseInt(document.getElementById("m6").value);
+	realInversekey[2][0] = parseInt(document.getElementById("m7").value);
+	realInversekey[2][1] = parseInt(document.getElementById("m8").value);
+	realInversekey[2][2] = parseInt(document.getElementById("m9").value);
+	var numberCheck;
+	// two methods depending on whether 1 or more depth.
+	if(matrixDepth === 1){	
+		var k = 0;
+		for(var i=0; i<3; i++){
+			encipheredMatrix[i] = textVector[k];
+			k++;
+		}				
+			
+		// now to multiply the text matrix with the key matrix, we do it 1 vector of 3 at a time, and then the modulo of each element
 		
+		for(var j = 0; j<3; j++){
+			numberCheck = 0;
+			for(var i = 0; i<3;i++){
+				numberCheck += (realInversekey[j][i] * encipheredMatrix[i]);
+			}
+			decipheredVector[j] = numberCheck%alength;
+			//alert(numberCheck%alength);
+			//alert(decipheredVector[j]);
+			for (var l = 0; l<alength; l++){
+				if(l === decipheredVector[j]){
+					decipheredText += alph[l];
+				}
+			}	
+		}	
+		document.getElementById("invMat_text").innerHTML = "Deciphered text is: " + decipheredText;
+	}else{
+		// and here for matrices above 1 depth.
+		for(var i = 0; i<3; i++){
+			encipheredMatrix[i] = new Array(matrixDepth);
+			decipheredMatrix[i] = new Array(matrixDepth);
+		}
+		// populte the array
+		var k = 0;
+		for(var j = 0; j < matrixDepth; j++){
+			for(var i=0; i < 3; i++){
+				encipheredMatrix[i][j] = textVector[k];
+				k++;
+			}	
+		}	
+		// now perform matrix mulitplication with the inverse key 
+		for(var k = 0; k < matrixDepth; k++){
+			for(var j = 0; j<3; j++){
+				numberCheck = 0;
+				for(var i = 0; i<3;i++){
+					numberCheck += (realInversekey[j][i] * encipheredMatrix[i][k]);
+				}
+				decipheredMatrix[j][k] = numberCheck%alength;
+				decipheredText += alph[decipheredMatrix[j][k]];
+			}	
+		}
+		document.getElementById("invMat_text").innerHTML = "Deciphered text is: " + decipheredText;
 	}
 }

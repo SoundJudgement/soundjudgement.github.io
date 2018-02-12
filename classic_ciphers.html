@@ -26,7 +26,7 @@
 			<p>Text to encipher/decipher.</p>
 			<input type="text" id="hill_text" >
 			<br>
-			<p>Please enter 3 x 3 matrix from letters 0-25 (representing A-Z).</p>	
+			<p id="hill_enterkeytext">Please enter 3 x 3 matrix to use as the key. All boxes must contain an integer corresponding to a letter of the alphabet:<br><br> ("A" = 0, "B" = 1, "C" = 2 ... "Z" = 25, " " = 26, "." = 27, "?" = 28). Characters not in the list will be ignored.</p>	
 			<input type="text" id="m1" >
 			<input type="text" id="m2" >
 			<input type="text" id="m3" >	
@@ -42,12 +42,12 @@
 			<input type="text" id="m9" >
 			<br>
 			<p id="hill_ciphertext">Ciphertext: </p>
-			<p id="invMat_text">Decipher Key:</p>
+			<p id="invMat_text">Decipher Key - enter this into the boxes above to decipher the enciphered text:</p>
 			<p id="matrix_inverse1">1 &emsp; 2 &emsp; 3</p>
 			<p id="matrix_inverse2">4 &emsp; 5 &emsp; 6</p>
 			<p id="matrix_inverse3">7 &emsp; 8 &emsp; 9</p>
 			<input type="submit" value="Encipher" onClick="hillEncipher()" >
-			<input type="submit" value="Decipher" onClick="caesarDecipher()" >
+			<input type="submit" value="Decipher" onClick="hillDecipher()" >
 			</div>
 		</div>
 		<div id="vigenere_cipher">
