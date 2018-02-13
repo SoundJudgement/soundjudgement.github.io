@@ -3,6 +3,10 @@ html, body, #wrapper_index, #wrapper_ciphers
 	font-family: Constantia, Lucida Bright, DejaVu Serif, Georgia, serif;	
 	width: 100%;
 	height: 100%;
+	background-image: url(images/noise.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
 	background-color:black;
 	color: white
 	
@@ -35,7 +39,6 @@ p
 	height: 35vh;
 	background-position: center center;
 	position: relative
-	
 }
 
 #jefferson
@@ -43,14 +46,6 @@ p
 	float: left; 
 	width: 31%; 
 	margin-right: 2%
-}
-#line1
-{
-	
-}
-#line2
-{
-	
 }
 #wheatstone
 {
@@ -92,7 +87,7 @@ p
 }
 #caesar_cipher
 {
-	background-image: url("images/nkg1.jpg");
+	background-image: url("images/nkg3.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-style: solid;
@@ -102,7 +97,7 @@ p
 }
 #hill_cipher
 {
-	background-image: url("images/nkg2.jpg");
+	background-image: url("images/nkg3.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-style: solid;
@@ -129,9 +124,9 @@ p
 	border-color: white;
 	width: 80%;
 	margin: auto;
-	margin-top: 50px;
-	margin-bottom: 50px;
-	height: 80vh;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	height: 85vh;
 	text-align: center
 }
 #inner_hill
@@ -143,9 +138,9 @@ p
 	border-color: white;
 	width: 80%;
 	margin: auto;
-	margin-top: 25px;
-	margin-bottom: 25px;
-	height: 90vh;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	height: 95vh;
 	text-align: center
 }
 #inner_vigenere
@@ -157,9 +152,9 @@ p
 	border-color: white;
 	width: 80%;
 	margin: auto;
-	margin-top: 50px;
-	margin-bottom: 50px;
-	height: 80vh;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	height: 85vh;
 	text-align: center
 }
 #caesar_text{
@@ -169,19 +164,19 @@ p
 	width:80%;
 }
 #matrix_inverse1{
-	 color: black;
+	 visibility: hidden;
 }
 #matrix_inverse2{
-	color: black;
+	visibility: hidden;
 }
 #matrix_inverse3{
-	color: black;
+	visibility: hidden;
 }
 #invMat_text{
-	color: black;
+	visibility: hidden;
 }
 #hill_ciphertext{
-	color: black;
+	visibility: hidden;
 }
 #hill_enterkeytext{
 	margin-left: 70px;
@@ -189,4 +184,10 @@ p
 }
 #m1, #m2, #m3, #m4, #m5, #m6, #m7, #m8, #m9{
 	width: 20px;
+}
+#vigenere_text{
+	width: 40%;
+}
+#vigenere_key{
+	width: 40%;
 }

@@ -85,7 +85,7 @@ function hillEncipher(){				// check for empty boxes
                 alert("Please enter a valid key - all boxes must contain an integer corresponding to a letter of the alphabet (A=0, B=1, C=2 ... Z=25, space=26, .=27, !=28)");
 				return false;
             }
-	
+	// extra characters in alphabet to ensure modulus is prime
 	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", " ", ".", "?"];
 	var alength = alph.length;
 	var text = document.getElementById("hill_text").value.toUpperCase();
@@ -123,7 +123,7 @@ function hillEncipher(){				// check for empty boxes
 						  key[0][1] * ( (key[1][0]*key[2][2]) - (key[1][2]*key[2][0]) ) + 
 						  key[0][2] * ( (key[1][0]*key[2][1]) - (key[1][1]*key[2][0]) );
 	if(key_determinant === 0){
-		alert("Matrix is not invertible. Use the example given or search for an invertible matrix. Or try another random key!");
+		alert("Matrix is not invertible. Try another random key!");
 		
 	}else{
 	// find inverse determinant
@@ -153,7 +153,7 @@ function hillEncipher(){				// check for empty boxes
 			signflipper *= -1;
 		}
 	}
-	// from this we can find the adjugate and the values for the inversekey - not actual inverse matrix - which seem to be different things...
+	// from this we can find the adjugate and the values for the inversekey
 	adjugate[0][0] = coFactor[0][0];
 	adjugate[0][1] = coFactor[1][0];
 	adjugate[0][2] = coFactor[2][0];
@@ -171,7 +171,7 @@ function hillEncipher(){				// check for empty boxes
 			realInverseKey[i][j] =((adjugate[i][j]%alength) * inverseDeterminant)%alength;		
 		}
 	}
-	// and from this the inverse matrix - which seemingly we dont need.
+	// and from this the inverse matrix
 	var z = 1/key_determinant; 		 
 	for(i = 0; i<3; i++){
 		for(var j = 0; j<3; j++){
@@ -245,21 +245,19 @@ function hillEncipher(){				// check for empty boxes
 			for(var j = 0; j<3; j++){
 				numberCheck = 0;
 				for(var i = 0; i<3;i++){
-					//alert(key[j][i] + " * " + textMatrix[i][k]);
 					numberCheck += (key[j][i] * textMatrix[i][k]);
-					//alert(key[j][i] + " multiplied by " + textMatrix[i][k]);
 				}
 				encipheredMatrix[j][k] = numberCheck%alength;
 				encipheredText += alph[encipheredMatrix[j][k]];
 			}	
 		}
 	}
-	document.getElementById("hill_ciphertext").style.color = "white";
+	document.getElementById("hill_ciphertext").style.visibility = "visible";
 	document.getElementById("hill_ciphertext").innerHTML = "Enciphered Text: " + encipheredText;
-	document.getElementById("invMat_text").style.color = "white";
-	document.getElementById("matrix_inverse1").style.color = "white";
-	document.getElementById("matrix_inverse2").style.color = "white";
-	document.getElementById("matrix_inverse3").style.color = "white";
+	document.getElementById("invMat_text").style.visibility = "visible";
+	document.getElementById("matrix_inverse1").style.visibility = "visible";
+	document.getElementById("matrix_inverse2").style.visibility = "visible";
+	document.getElementById("matrix_inverse3").style.visibility = "visible";
 	document.getElementById("matrix_inverse1").innerHTML = realInverseKey[0][0] + "&emsp;" + realInverseKey[0][1] + "&emsp;" + realInverseKey[0][2];
 	document.getElementById("matrix_inverse2").innerHTML = realInverseKey[1][0] + "&emsp;" + realInverseKey[1][1] + "&emsp;" + realInverseKey[1][2];
 	document.getElementById("matrix_inverse3").innerHTML = realInverseKey[2][0] + "&emsp;" + realInverseKey[2][1] + "&emsp;" + realInverseKey[2][2];
@@ -370,3 +368,121 @@ function hillDecipher(){				// check for empty boxes
 		document.getElementById("invMat_text").innerHTML = "Deciphered text is: " + decipheredText;
 	}
 }
+
+function vigenereEncipher(){
+	if (document.getElementById("vigenere_text").value === "") {	// check for empty boxes
+                alert("Please enter some text to encipher.");
+				return false;
+    } else if (document.getElementById("vigenere_key").value === "") {
+                alert("Please enter a valid key.");
+				return false;
+            }
+	if(document.getElementById("vigenere_text").value.length !== document.getElementById("vigenere_key").value.length){
+		alert("Key must be the same length as the text you wish to encipher.");
+		return false;
+	}
+	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+	var alength = alph.length;
+	var text = document.getElementById("vigenere_text").value.toUpperCase();  // send to upper case so we can compare with our alphabet
+	var key = document.getElementById("vigenere_key").value.toUpperCase();
+	var encipheredText = "";
+	var tabulaRecta = [];
+	var tempChar1 = "";
+	var tempChar2 = "";
+	for (var i = 0; i < alength; i++){
+		tabulaRecta[i] = new Array(alength);
+	}
+	// populate tabula recta
+	for (var i = 0; i<alength; i++){
+		for (var j = 0; j<alength; j++){
+			tabulaRecta[i][j] = alph[j];
+		}
+		// then shift alphabet one for the next row.
+		for(var l = 0; l<alength; l++){
+			if(l === 0){
+				tempChar1 = alph[0];
+				alph[0] = alph[alength-1];
+			}else{
+				tempChar2 = alph[l];
+				alph[l] = tempChar1;
+				tempChar1 = tempChar2;
+			}
+			
+		}
+	}
+	
+	var index = 0;
+	for(var i = 0; i<text.length; i++){
+		for(var k = 0; k < alength; k++){
+			if(text[i] === alph[k]){
+				index = k;	
+			}
+		}
+		for(var j = 0; j<alength; j++){
+			if(key[i] === tabulaRecta[j][0]){
+				encipheredText += tabulaRecta[j][index];	
+			}		
+		}
+	}
+	document.getElementById("vigenere_output").innerHTML = "Deciphered text is: " + encipheredText;
+}
+// vigenere decipher 
+function vigenereDecipher(){
+	if (document.getElementById("vigenere_text").value === "") {	// check for empty boxes
+                alert("Please enter some text to decipher.");
+				return false;
+    } else if (document.getElementById("vigenere_key").value === "") {
+                alert("Please enter a valid key.");
+				return false;
+            }
+	if(document.getElementById("vigenere_text").value.length !== document.getElementById("vigenere_key").value.length){
+		alert("Key should be the same length as the text you wish to decipher.");
+		return false;
+	}
+	var alph = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+	var alength = alph.length;
+	var text = document.getElementById("vigenere_text").value.toUpperCase();  // send to upper case so we can compare with our alphabet
+	var key = document.getElementById("vigenere_key").value.toUpperCase();
+	var decipheredText = "";
+	var tabulaRecta = [];
+	var tempChar1 = "";
+	var tempChar2 = "";
+	for (var i = 0; i < alength; i++){
+		tabulaRecta[i] = new Array(alength);
+	}
+	// populate tabula recta
+	for (var i = 0; i<alength; i++){
+		for (var j = 0; j<alength; j++){
+			tabulaRecta[i][j] = alph[j];
+		}
+		// then shift alphabet one for the next row.
+		for(var l = 0; l<alength; l++){
+			if(l === 0){
+				tempChar1 = alph[0];
+				alph[0] = alph[alength-1];
+			}else{
+				tempChar2 = alph[l];
+				alph[l] = tempChar1;
+				tempChar1 = tempChar2;
+			}
+			
+		}
+	}
+	// now to decipher
+	var index = 0;
+	for(var i = 0; i<text.length; i++){
+		for(var k = 0; k < alength; k++){
+			if(key[i] === tabulaRecta[k][0]){
+				index = k;	
+			}
+		}
+		for(var j = 0; j<alength; j++){
+			if(text[i] === tabulaRecta[index][j]){
+				decipheredText += tabulaRecta[0][j];	
+			}		
+		}
+	}
+	document.getElementById("vigenere_output").innerHTML = "Deciphered text is: " + decipheredText;
+}
+	
+	

@@ -11,6 +11,7 @@
 	<div id="heading"><h1><br>Classical <br>Ciphers</h1></div>
 		<div id="caesar_cipher">
 			<div id="inner_caesar"><h1>Caesar Cipher</h1>
+			<br><br><br>
 				<p>Text to encipher/decipher.</p>
 				<input type="text" id="caesar_text" >
 				<p>Numeric key.</p>
@@ -26,7 +27,7 @@
 			<p>Text to encipher/decipher.</p>
 			<input type="text" id="hill_text" >
 			<br>
-			<p id="hill_enterkeytext">Please enter 3 x 3 matrix to use as the key. All boxes must contain an integer corresponding to a letter of the alphabet:<br><br> ("A" = 0, "B" = 1, "C" = 2 ... "Z" = 25, " " = 26, "." = 27, "?" = 28). Characters not in the list will be ignored.</p>	
+			<p id="hill_enterkeytext">Characters in the text not in the list will be ignored.<br><br> Please enter 3 x 3 matrix to use as the key. All boxes must contain a number corresponding to a letter of the alphabet used (0-28):<br></br>("A" = 0, "B" = 1, "C" = 2 ... "Z" = 25, " " = 26, "." = 27, "?" = 28)  </p>	
 			<input type="text" id="m1" >
 			<input type="text" id="m2" >
 			<input type="text" id="m3" >	
@@ -51,7 +52,15 @@
 			</div>
 		</div>
 		<div id="vigenere_cipher">
-			<div id="inner_vigenere"><h1>Vigenere Cipher</h1></div>
+			<div id="inner_vigenere"><h1>Vigenere Cipher</h1><br><br><br><p>Text to encipher/decipher. Only the letters a-z.</p>
+				<input type="text" id="vigenere_text" >
+				<p>Alphabetic key. It must be the same length as the main text.</p>
+				<input type="text" id="vigenere_key" >
+				<br><br>
+				<input type="submit" value="Encipher" onClick="vigenereEncipher()" >
+				<input type="submit" value="Decipher" onClick="vigenereDecipher()" >
+				<br>
+				<h2 id="vigenere_output"></h2>	</div>
 		</div>
 	</div></div>
 </body>
