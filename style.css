@@ -131,7 +131,7 @@ p
 }
 #inner_hill
 {
-	background-image: url("images/innercipherbkg1.jpg");
+	background-image: url("images/innercipherbkg2.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-style: solid;
@@ -145,7 +145,7 @@ p
 }
 #inner_vigenere
 {
-	background-image: url("images/innercipherbkg1.jpg");
+	background-image: url("images/innercipherbkg3.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-style: solid;
