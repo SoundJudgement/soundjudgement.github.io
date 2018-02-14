@@ -8,21 +8,51 @@ html, body, #wrapper_index, #wrapper_ciphers
 	background-size: cover;
 	background-attachment: fixed;
 	background-color:black;
-	color: white
+	color: white;
 	
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+	left:0;
+    width: 100%;
+}
+
+li {
+    float: left;
+}
+
+li a {
+	font-family: Constantia, Lucida Bright, DejaVu Serif, Georgia, serif;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: black;
+}
+li a.active {
+    background-color: #00008B;
+    color: white;
 }
 p 
 {
 	font-family: Constantia, Lucida Bright, DejaVu Serif, Georgia, serif;
-	color:white
+	color:white;
 }
 #container_index, #container_ciphers
 {
 	width: 960px;
 	margin: 0 auto;
-	
-	padding: 6px 12px
-   
+	padding: 6px 12px;  
 }
 
 #heading 
@@ -38,14 +68,14 @@ p
 	width: 100%;
 	height: 35vh;
 	background-position: center center;
-	position: relative
+	position: relative;
 }
 
 #jefferson
 {
 	float: left; 
 	width: 31%; 
-	margin-right: 2%
+	margin-right: 2%;
 }
 #wheatstone
 {
@@ -57,14 +87,14 @@ p
 {
 	float: left; 
 	width: 31%; 
-	margin-right: 2%
+	margin-right: 2%;
 }
 #main_intro{
-	text-align: justify
+	text-align: justify;
 }
 #classical_ciphers
 {
-	text-align: justify
+	text-align: justify;
 }
 #caesar_cipherbtn
 {
@@ -77,13 +107,13 @@ p
 {
 	float: left; 
 	width: 31%; 
-	margin-right: 2%
+	margin-right: 2%;
 }
 #vigenere_cipherbtn
 {
 	float: left; 
 	width: 31%; 
-	margin-right: 2%
+	margin-right: 2%;
 }
 #caesar_cipher
 {
@@ -93,7 +123,7 @@ p
 	border-style: solid;
 	border-color: white;
 	width: 100%;
-	height: 100vh	
+	height: 100vh;
 }
 #hill_cipher
 {
@@ -103,7 +133,7 @@ p
 	border-style: solid;
 	border-color: white;
 	width: 100%;
-	height: 100vh	
+	height: 100vh;
 }
 #vigenere_cipher
 {
@@ -127,7 +157,7 @@ p
 	margin-top: 30px;
 	margin-bottom: 30px;
 	height: 85vh;
-	text-align: center
+	text-align: center;
 }
 #inner_hill
 {
@@ -141,7 +171,7 @@ p
 	margin-top: 15px;
 	margin-bottom: 15px;
 	height: 95vh;
-	text-align: center
+	text-align: center;
 }
 #inner_vigenere
 {
@@ -155,7 +185,7 @@ p
 	margin-top: 30px;
 	margin-bottom: 30px;
 	height: 85vh;
-	text-align: center
+	text-align: center;
 }
 #caesar_text{
 	width: 60%;		
@@ -174,6 +204,10 @@ p
 }
 #invMat_text{
 	visibility: hidden;
+	width: 80%;
+	text-align: justify;
+	margin-left: 70px;
+	margin-right: 70px;
 }
 #hill_ciphertext{
 	visibility: hidden;

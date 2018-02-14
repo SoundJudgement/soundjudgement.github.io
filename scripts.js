@@ -122,9 +122,9 @@ function hillEncipher(){				// check for empty boxes
 	var key_determinant = key[0][0] * ( (key[1][1]*key[2][2]) - (key[1][2]*key[2][1]) ) - 
 						  key[0][1] * ( (key[1][0]*key[2][2]) - (key[1][2]*key[2][0]) ) + 
 						  key[0][2] * ( (key[1][0]*key[2][1]) - (key[1][1]*key[2][0]) );
-	if(key_determinant === 0){
+	if(key_determinant === 0 ){
 		alert("Matrix is not invertible. Try another random key!");
-		
+		return false;
 	}else{
 	// find inverse determinant
 	for(var i = 2; i<alength; i++){
@@ -167,6 +167,10 @@ function hillEncipher(){				// check for empty boxes
 		for(var j = 0; j <3; j++){
 			while(adjugate[i][j] < 0){
 				adjugate[i][j] += alength;
+			}
+			if(isNaN(((adjugate[i][j]%alength) * inverseDeterminant)%alength)){
+				alert("Matrix is not invertible. Try another random key!");
+				return false;
 			}
 			realInverseKey[i][j] =((adjugate[i][j]%alength) * inverseDeterminant)%alength;		
 		}
@@ -365,7 +369,7 @@ function hillDecipher(){				// check for empty boxes
 				decipheredText += alph[decipheredMatrix[j][k]];
 			}	
 		}
-		document.getElementById("invMat_text").innerHTML = "Deciphered text is: " + decipheredText;
+		document.getElementById("invMat_text").innerHTML = "Dwciphered text is: " + decipheredText + ". Any extra characters added to the end are because the length of the text needs to be a multiple of 3, so we add padding.";
 	}
 }
 
