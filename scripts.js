@@ -1,4 +1,3 @@
-
 //function to encipher using caesars pathetic cipher
 function caesarEncipher(){
 	if (document.getElementById("caesar_text").value === "") {	// check for empty boxes
@@ -169,7 +168,7 @@ function hillEncipher(){				// check for empty boxes
 				adjugate[i][j] += alength;
 			}
 			if(isNaN(((adjugate[i][j]%alength) * inverseDeterminant)%alength)){
-				alert("Matrix is not invertible. Try another random key!");
+				alert("Matrix is not invertible. Try another random key! It is better to make sure there are not so many repeating numbers or 0's.");
 				return false;
 			}
 			realInverseKey[i][j] =((adjugate[i][j]%alength) * inverseDeterminant)%alength;		
@@ -369,7 +368,7 @@ function hillDecipher(){				// check for empty boxes
 				decipheredText += alph[decipheredMatrix[j][k]];
 			}	
 		}
-		document.getElementById("invMat_text").innerHTML = "Dwciphered text is: " + decipheredText + ". Any extra characters added to the end are because the length of the text needs to be a multiple of 3, so we add padding.";
+		document.getElementById("invMat_text").innerHTML = "Deciphered text is: " + decipheredText + ". Any extra characters added to the end are because the length of the text needs to be a multiple of 3, so we add padding.";
 	}
 }
 
@@ -489,4 +488,14 @@ function vigenereDecipher(){
 	document.getElementById("vigenere_output").innerHTML = "Deciphered text is: " + decipheredText;
 }
 	
-	
+function popHillKey(){
+	document.getElementById("m1").value = 6;
+	document.getElementById("m2").value = 24;
+	document.getElementById("m3").value = 1;
+	document.getElementById("m4").value = 13;
+	document.getElementById("m5").value = 16;
+	document.getElementById("m6").value = 10;
+	document.getElementById("m7").value = 20;
+	document.getElementById("m8").value = 17;
+	document.getElementById("m9").value = 15;
+}

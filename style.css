@@ -21,6 +21,26 @@ ul {
     top: 0;
 	left:0;
     width: 100%;
+	border-bottom: 1px solid;
+}
+/* unvisited link */
+#footer.a:link {
+    color: lightblue;
+}
+
+/* visited link */
+#footer.a:visited {
+    color: darkblue;
+}
+
+/* mouse over link */
+#footer.a:hover {
+    color: #C6E2E3;
+}
+
+/* selected link */
+#footer.a:active {
+    color: blue;
 }
 
 li {
@@ -225,3 +245,15 @@ p
 #vigenere_key{
 	width: 40%;
 }
+#footer{
+	width: 100%;
+	text-align: center;
+	background-color:#262626;
+	bottom: 0px;
+	position: fixed;
+	height: 35px;
+	text-align: center;
+	border-top: 1px solid;
+	
+}
+
