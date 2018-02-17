@@ -12,17 +12,39 @@
 </head>
 <body>
 	<div id="wrapper_ciphers">
-	<div id="container_ciphers">
-	<br><br>
-	<div id="heading"><h1><br><br>Test Some Ciphers</h1>
-	<ul>
-  	<li><a href="index.html">Home</a></li>
- 	 <li><a  class="active" href="classic_ciphers.html">Test Ciphers</a></li>
-	</ul>
-	</div>
-		<div id="caesar_cipher">
-			<div id="inner_caesar"><h1>Caesar Cipher</h1>
-			<br><br><br>
+		<div id="container_ciphers">
+			<br><br>
+				<div id="heading"><h1><br><br>Test Some Ciphers</h1>
+					<ul>
+  						<li><a href="index.html">Home</a></li>
+ 	 					<li><a  class="active" href="classic_ciphers.html">Test Ciphers</a></li>
+					</ul>
+			</div>
+			<div id="caesar_cipher">
+				<div id="inner_caesar"><h1>Caesar Cipher</h1>
+					<a href="#popupCaesar"><button id="aboutCaesar">About this cipher</button></a>
+					<div id="popupCaesar" class="overlay">
+						<div class="popup">
+							<h2>About the Caesar Cipher</h2>
+							<div class="content">
+								<p id="caesarDesc">&emsp;&emsp; The following example taken from the home page is an example of the Caesar Cipher in action. It was allegedly used by Julias Caesar to send secret messages. <br>
+								It is a simple monoalphabetic substitution cipher. Encrypting some text with a key of +2 simply means substituting the letter for another, 2 places along the alphabet:
+								<br>
+								<br>A B C D E F G H I J K L M N O P Q R S T U V W X W Z
+								<br>
+								<br>Original Sentence - 'I LOVE CRYPTOGRAPHY'.
+								<br>
+								<br> + 1 &emsp;&emsp;&emsp; J MPWF DSZQUPHSBQIZ
+								<br>
+								<br> + 2 &emsp;&emsp;&emsp; K NQXG ETARVQITCRJA - enciphered text.
+								<br>
+								<p> To decrypt we just perform the task in the opposite direction so the key becomes -2.<br>The method is pretty unsecure. It wouldn't take long to try all 26 letters of the alphabet. We can also use a method called frequency analysis to to determine the key,<br> the main principle being that for the english language (or indeed any language), the distribution of each letter is fairly predictable, <br>and becomes more so as the size of the text increases.</p>
+								<a class="close" href="#caesar_cipher">&times;</a>
+								<br><br>
+							</div>
+						</div>
+					</div>
+				<br><br><br>
 				<p>Text to encipher/decipher.</p>
 				<input type="text" id="caesar_text" >
 				<p>Numeric key.</p>
@@ -32,39 +54,61 @@
 				<input type="submit" value="Decipher" onClick="caesarDecipher()" >
 				<br>
 				<h2 id="caesar_output"></h2>	
-		</div>
-		<div id="hill_cipher">
-			<div id="inner_hill"><h1>Hill Cipher</h1>
-			<p>Text to encipher/decipher.</p>
-			<input type="text" id="hill_text" >
-			<br>
-			<p id="hill_enterkeytext">Characters in the text not in the list will be ignored.<br><br> Please enter 3 x 3 matrix to use as the key. All boxes must contain a number corresponding to a letter of the alphabet used (0-28). Or click to automatically populate:<br><br>("A" = 0, "B" = 1, "C" = 2 ... "Z" = 25, " " = 26, "." = 27, "?" = 28)&emsp;<input type="submit" value="Populate Key" onClick="popHillKey()" >  </p>	
-			
-			<input type="text" id="m1" >
-			<input type="text" id="m2" >
-			<input type="text" id="m3" >	
-			<br>
-			<br>
-			<input type="text" id="m4" >
-			<input type="text" id="m5" >
-			<input type="text" id="m6" >
-			<br>
-			<br>
-			<input type="text" id="m7" >
-			<input type="text" id="m8" >
-			<input type="text" id="m9" >
-			<br>
-			<p id="hill_ciphertext">Ciphertext: </p>
-			<p id="invMat_text">Decipher Key - enter this into the boxes above to decipher the enciphered text:</p>
-			<p id="matrix_inverse1">1 &emsp; 2 &emsp; 3</p>
-			<p id="matrix_inverse2">4 &emsp; 5 &emsp; 6</p>
-			<p id="matrix_inverse3">7 &emsp; 8 &emsp; 9</p>
-			<input type="submit" value="Encipher" onClick="hillEncipher()" >
-			<input type="submit" value="Decipher" onClick="hillDecipher()" >
 			</div>
-		</div>
-		<div id="vigenere_cipher">
-			<div id="inner_vigenere"><h1>Vigenere Cipher</h1><br><br><br><p>Text to encipher/decipher. Only the letters A-Z.</p>
+			<div id="hill_cipher">
+				<div id="inner_hill"><h1>Hill Cipher</h1>
+				<a href="#popupHill"><button id="aboutHill">About this cipher</button></a>
+					<div id="popupHill" class="overlay">
+						<div class="popup">
+							<h2>About the Hill Cipher</h2>
+							<div class="content">
+								<p id="hillDesc">&emsp;&emsp; The Hill Cipher is a polygraphic substitution cipher, whereby the text to encipher is divided into x vectors of length n, and each vector is multiplied with a n * n invertible matrix and the result modulo the length of the alphabet used. This gives the benefit of using 'n' different keys. Plus if we try to to perform the same encryption with the same letters but in a different order, every letter will be different in the encrypted version, making it far harder to guess and less susceptible to frequency analysis. To decrypt we must multiply the enciphered vectors by the inverse matrix modulo the length of the alphabet.</p>
+								<a class="close" href="#hill_cipher">&times;</a>
+							</div>
+						</div>
+					</div>
+					<p>Text to encipher/decipher.</p>
+					<input type="text" id="hill_text" >
+					<br>
+					<p id="hill_enterkeytext">Characters in the text not in the list will be ignored.&emsp;&emsp;
+					<input type="submit" value="Encipher" onClick="hillEncipher()" >
+					<input type="submit" value="Decipher" onClick="hillDecipher()" ><br><br> Please enter 3 x 3 matrix to use as the key. All boxes must contain a number corresponding to a letter of the alphabet used (0-28). Or click to automatically populate:<br><br>("A" = 0, "B" = 1, "C" = 2 ... "Z" = 25, " " = 26, "." = 27, "?" = 28)&emsp;<input type="submit" value="Populate Key" onClick="popHillKey()" >  </p>	
+					<input type="text" id="m1" >
+					<input type="text" id="m2" >
+					<input type="text" id="m3" >	
+					<br>
+					<br>
+					<input type="text" id="m4" >
+					<input type="text" id="m5" >
+					<input type="text" id="m6" >
+					<br>
+					<br>
+					<input type="text" id="m7" >
+					<input type="text" id="m8" >
+					<input type="text" id="m9" >
+					<br>
+					<p id="hill_ciphertext">Ciphertext: </p>
+					<p id="invMat_text">Decipher Key - enter this into the boxes above to decipher the enciphered text:</p>
+					<p id="matrix_inverse1">1 &emsp; 2 &emsp; 3</p>
+					<p id="matrix_inverse2">4 &emsp; 5 &emsp; 6</p>
+					<p id="matrix_inverse3">7 &emsp; 8 &emsp; 9</p>
+					
+				</div>
+			</div>
+			<div id="vigenere_cipher">
+				<div id="inner_vigenere"><h1>Vigenere Cipher</h1>
+				<a href="#popupVigenere"><button id="aboutVigenere">About this cipher</button></a>
+				<div id="popupVigenere" class="overlay">
+						<div class="popup">
+							<h2>About the Vigenere Cipher</h2>
+							<div class="content">
+								The Vigenere Cipher is a polyalphabetic substitution cipher. It is essentially 26 Caesar Ciphers arranged into a table (called a tabula recta), each subsequent row <br> is the previous alphabet shifted +1. The key is a string of text or repeating word the same length as the input text, and each letter of the key corresponds to a <br> different row of the table. If the key was CAT, for example, the key for the first letter of the input text would be 2, the second key would be 0, and the third and <br> final key of our mystery 3 letter input would be 19 (assuming 0=A, B=2....Z=25).
+								<br>
+								<a class="close" href="#vigenere_cipher">&times;</a>
+							</div>
+						</div>
+					</div><br><br><br><p>Text to encipher/decipher. Only the letters A-Z.</p>
+				
 				<input type="text" id="vigenere_text" >
 				<p>Alphabetic key. It must be the same length as the main text.</p>
 				<input type="text" id="vigenere_key" >
@@ -74,9 +118,10 @@
 				<br>
 				<h2 id="vigenere_output"></h2>	
 				</div>
-		</div>
+			</div>
 		
-	</div></div>
-	<div id="footer"><p id ="footer_text">Copyright © 2018&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Site by <a href="https://www.linkedin.com/in/leerobinson1984/" target="_blank">Lee</a><br><br></p></div></div>
+		</div>
+	</div>
+	<div id="footer"><p id ="footer_text">Copyright © 2018&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Site by <a 	href="https://www.linkedin.com/in/leerobinson1984/" target="_blank">Lee</a><br><br></p></div></div>
 </body>
 </html>
