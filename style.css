@@ -1,3 +1,8 @@
+/*
+ Author: Lee Robinson
+ Project: Stylesheet for SET08101cw
+ Last updated 17/02/2018 03:28
+*/
 html, body, #wrapper_index, #wrapper_ciphers
 {
 	font-family: Constantia, Lucida Bright, DejaVu Serif, Georgia, serif;	
@@ -25,22 +30,22 @@ ul {
 	border-bottom: 1px solid;
 }
 /* unvisited link */
-#footer.a:link {
+a:link {
     color: lightblue;
 }
 
 /* visited link */
-#footer.a:visited {
+a:visited {
     color: darkblue;
 }
 
 /* mouse over link */
-#footer.a:hover {
+a:hover {
     color: #C6E2E3;
 }
 
 /* selected link */
-#footer.a:active {
+a:active {
     color: blue;
 }
 
@@ -78,10 +83,6 @@ p
 
 #heading 
 {
-	background-image: url("images/header.jpg");
-	background-color:black;
-	border-style: solid;
-	border-color: white;
 	color:white;
 	text-align:center;
 	background-repeat: no-repeat;
@@ -91,7 +92,9 @@ p
 	background-position: center center;
 	position: relative;
 }
-
+#designs{
+	text-align: center;
+}
 #jefferson
 {
 	float: left; 
@@ -255,6 +258,5 @@ p
 	height: 35px;
 	text-align: center;
 	border-top: 1px solid;
-	
 }
 

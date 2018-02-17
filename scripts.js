@@ -1,3 +1,7 @@
+// Author: Lee Robinson
+// Project: SET08101 CW scripts
+// Last updated 17/02/2018 03:28
+
 //function to encipher using caesars pathetic cipher
 function caesarEncipher(){
 	if (document.getElementById("caesar_text").value === "") {	// check for empty boxes
