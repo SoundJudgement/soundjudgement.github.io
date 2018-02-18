@@ -70,9 +70,9 @@ li a.active {
     color: white;
 }
 h1 {
-	font-size: 125pt;
+	font-size: 22pt; /*manually set as it is shrunk using the webkit */
     margin-top: 25px;
-    font-size: 21px;
+   
     text-align: center;
 
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
@@ -81,7 +81,9 @@ h1 {
          -o-animation: fadein 2s; /* Opera < 12.1 */
             animation: fadein 2s;
 }
-
+h2{
+	font-size: 18px;
+}
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
