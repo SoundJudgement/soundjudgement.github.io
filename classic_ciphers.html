@@ -17,7 +17,7 @@
 				<div id="heading"><h1><br><br>Test Some Ciphers</h1>
 					<ul>
   						<li><a href="index.html">Home</a></li>
- 	 					<li><a  class="active" href="classic_ciphers.html">Test Ciphers</a></li>
+ 	 					<li><a  class="active" href="classic_ciphers.html#caesar_cipher">Test Ciphers</a></li>
 					</ul>
 			</div>
 			<div id="caesar_cipher">
@@ -25,7 +25,8 @@
 					<a href="#popupCaesar"><button id="aboutCaesar">About this cipher</button></a>
 					<div id="popupCaesar" class="overlay">
 						<div class="popup">
-							<h2>About the Caesar Cipher</h2>
+						<br><br><br>
+							<h1>About the Caesar Cipher</h1>
 							<div class="content">
 								<p id="caesarDesc">&emsp;&emsp; The following example taken from the home page is an example of the Caesar Cipher in action. It was allegedly used by Julias Caesar to send secret messages. <br>
 								It is a simple monoalphabetic substitution cipher. Encrypting some text with a key of +2 simply means substituting the letter for another, 2 places along the alphabet:
@@ -53,14 +54,15 @@
 				<input type="submit" value="Encipher" onClick="caesarEncipher()" >
 				<input type="submit" value="Decipher" onClick="caesarDecipher()" >
 				<br>
-				<h2 id="caesar_output"></h2>	
+				<h1 id="caesar_output"></h1>	
 			</div>
 			<div id="hill_cipher">
 				<div id="inner_hill"><h1>Hill Cipher</h1>
 				<a href="#popupHill"><button id="aboutHill">About this cipher</button></a>
 					<div id="popupHill" class="overlay">
 						<div class="popup">
-							<h2>About the Hill Cipher</h2>
+						<br><br><br>
+							<h1>About the Hill Cipher</h1>
 							<div class="content">
 								<p id="hillDesc">&emsp;&emsp; The Hill Cipher is a polygraphic substitution cipher, whereby the text to encipher is divided into x vectors of length n, and each vector is multiplied with a n * n invertible matrix and the result modulo the length of the alphabet used. This gives the benefit of using 'n' different keys. Plus if we try to to perform the same encryption with the same letters but in a different order, every letter will be different in the encrypted version, making it far harder to guess and less susceptible to frequency analysis. To decrypt we must multiply the enciphered vectors by the inverse matrix modulo the length of the alphabet.</p>
 								<a class="close" href="#hill_cipher">&times;</a>
@@ -100,7 +102,8 @@
 				<a href="#popupVigenere"><button id="aboutVigenere">About this cipher</button></a>
 				<div id="popupVigenere" class="overlay">
 						<div class="popup">
-							<h2>About the Vigenere Cipher</h2>
+						<br><br><br>
+							<h1>About the Vigenere Cipher</h1>
 							<div class="content">
 								The Vigenere Cipher is a polyalphabetic substitution cipher. It is essentially 26 Caesar Ciphers arranged into a table (called a tabula recta), each subsequent row <br> is the previous alphabet shifted +1. The key is a string of text or repeating word the same length as the input text, and each letter of the key corresponds to a <br> different row of the table. If the key was CAT, for example, the key for the first letter of the input text would be 2, the second key would be 0, and the third and <br> final key of our mystery 3 letter input would be 19 (assuming 0=A, B=2....Z=25).
 								<br>
@@ -116,7 +119,7 @@
 				<input type="submit" value="Encipher" onClick="vigenereEncipher()" >
 				<input type="submit" value="Decipher" onClick="vigenereDecipher()" >
 				<br>
-				<h2 id="vigenere_output"></h2>	
+				<h1 id="vigenere_output"></h1>	
 				</div>
 			</div>
 		
