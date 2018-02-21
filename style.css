@@ -36,7 +36,7 @@ a:link {
 
 /* visited link */
 a:visited {
-    color: darkblue;
+    color: blue;
 }
 
 /* mouse over link */
@@ -63,7 +63,7 @@ li a {
 }
 
 li a:hover:not(.active) {
-    background-color: black;
+    background-color: darkblue;
 }
 li a.active {
     background-color: #00008B;

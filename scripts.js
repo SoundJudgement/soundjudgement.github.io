@@ -172,13 +172,13 @@ function hillEncipher(){				// check for empty boxes
 				adjugate[i][j] += alength;
 			}
 			if(isNaN(((adjugate[i][j]%alength) * inverseDeterminant)%alength)){
-				alert("Matrix is not invertible. Try another random key! It is better to make sure there are not so many repeating numbers or 0's.");
+				alert("Matrix is not invertible. Try another random key!");
 				return false;
 			}
 			realInverseKey[i][j] =((adjugate[i][j]%alength) * inverseDeterminant)%alength;		
 		}
 	}
-	// and from this the inverse matrix
+	// and from this the inverse matrix -- pretty sure i dont need shis now.
 	var z = 1/key_determinant; 		 
 	for(i = 0; i<3; i++){
 		for(var j = 0; j<3; j++){
@@ -491,7 +491,7 @@ function vigenereDecipher(){
 	}
 	document.getElementById("vigenere_output").innerHTML = "Deciphered text is: " + decipheredText;
 }
-	
+// populate the inverseky for hill cipher
 function popHillKey(){
 	document.getElementById("m1").value = 6;
 	document.getElementById("m2").value = 24;
